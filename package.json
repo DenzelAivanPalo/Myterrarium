@@ -4,8 +4,8 @@
   "description": "A virtual terrarium where you can drag and drop plants",
   "main": "index.html",
   "scripts": {
-    "dev": "python3 -m http.server 3000",
-    "start": "python3 -m http.server 8000"
+    "dev": "http-server . -p 3000 -c-1",
+    "start": "http-server . -p 8000 -c-1"
   },
   "keywords": ["terrarium", "drag-drop", "plants", "interactive"],
   "author": "",
