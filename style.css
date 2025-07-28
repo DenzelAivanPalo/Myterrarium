@@ -72,8 +72,8 @@ h1 {
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		width: 400px;
-		height: 400px;
+		width: 600px;
+		height: 600px;
 	}
 }
 
@@ -115,8 +115,8 @@ h1 {
 		grid-row: 3;
 		position: relative;
 		width: 100%;
-		height: 300px;
-		max-width: 350px;
+		height: 450px;
+		max-width: 500px;
 		justify-self: center;
 		align-self: center;
 	}
@@ -144,8 +144,8 @@ h1 {
 	#terrarium {
 		position: relative;
 		width: 100%;
-		height: 250px;
-		max-width: 300px;
+		height: 350px;
+		max-width: 400px;
 		margin: 1rem auto;
 		order: 2;
 	}
@@ -213,7 +213,7 @@ h1 {
 	width: auto;
 	height: auto;
 	object-fit: contain;
-	z-index: 2;
+	z-index: 10;
 	transition: transform 0.2s ease;
 	cursor: grab;
 	user-select: none;
@@ -239,7 +239,7 @@ h1 {
 	bottom: 0.5%;
 	left: 20%;
 	opacity: 0.6;
-	z-index: 1;
+	z-index: 0;
 	box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -251,7 +251,7 @@ h1 {
 	bottom: 80.5%;
 	left: 25%;
 	opacity: 0.8;
-	z-index: 1;
+	z-index: 0;
 	border-radius: 0.5rem 0.5rem 0 0;
 }
 
@@ -274,7 +274,7 @@ h1 {
 	bottom: 1%;
 	left: 20%;
 	opacity: 0.8;
-	z-index: 0;
+	z-index: 1;
 }
 
 .jar-glossy-long {
@@ -286,7 +286,7 @@ h1 {
 	bottom: 20%;
 	left: 5%;
 	opacity: 0.9;
-	z-index: 2;
+	z-index: 5;
 }
 
 .jar-glossy-short {
@@ -298,14 +298,14 @@ h1 {
 	bottom: 45%;
 	left: 5%;
 	opacity: 0.9;
-	z-index: 2;
+	z-index: 5;
 }
 
 /* Responsive terrarium scaling */
 @media (max-width: 480px) {
 	#terrarium {
-		height: 200px;
-		max-width: 250px;
+		height: 300px;
+		max-width: 350px;
 	}
 	
 	.jar-glossy-long,
