@@ -1,0 +1,13 @@
+{
+  "name": "virtual-terrarium",
+  "version": "1.0.0",
+  "description": "A virtual terrarium where you can drag and drop plants",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 3000",
+    "start": "python3 -m http.server 8000"
+  },
+  "keywords": ["terrarium", "drag-drop", "plants", "interactive"],
+  "author": "",
+  "license": "MIT"
+}
