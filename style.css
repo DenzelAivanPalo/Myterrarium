@@ -1,50 +1,234 @@
+/* Reset and base styles */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
 body {
 	font-family: helvetica, arial, sans-serif;
+	min-height: 100vh;
+	background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+	overflow-x: hidden;
+}
+
+/* Header styles */
+h1 {
+	color: #3a241d;
+	text-align: center;
+	font-size: clamp(1.5rem, 4vw, 2.5rem);
+	margin: 1rem 0;
+	font-weight: 600;
 }
 
 #instructions {
 	color: #3a241d;
-	font-size: 1.2em;
+	font-size: clamp(0.9rem, 2.5vw, 1.2rem);
 	text-align: center;
-	margin: 10px 0 20px 0;
+	margin: 0.5rem 1rem 1rem 1rem;
+	font-weight: 400;
 }
 
-h1 {
-	color: #3a241d;
-	text-align: center;
+/* Main page container */
+#page {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	position: relative;
 }
 
-#left-container {
-	left: 0px;
-}
-
-#right-container {
-	right: 0px;
-}
-
+/* Container layout for different screen sizes */
 .container {
-	background-color: #eee;
-	width: 15%;
-	top: 0px;
-	position: absolute;
-	height: 100%;
-	padding: 10px;
+	background-color: rgba(238, 238, 238, 0.9);
+	backdrop-filter: blur(10px);
+	border-radius: 12px;
+	padding: 1rem;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	transition: all 0.3s ease;
 }
 
+/* Desktop layout */
+@media (min-width: 1024px) {
+	.container {
+		position: absolute;
+		width: 15%;
+		min-width: 200px;
+		height: calc(100vh - 120px);
+		top: 120px;
+		overflow-y: auto;
+	}
+	
+	#left-container {
+		left: 2%;
+	}
+	
+	#right-container {
+		right: 2%;
+	}
+	
+	#terrarium {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 400px;
+		height: 400px;
+	}
+}
+
+/* Tablet layout */
+@media (min-width: 768px) and (max-width: 1023px) {
+	#page {
+		display: grid;
+		grid-template-rows: auto auto 1fr;
+		grid-template-columns: 1fr 2fr 1fr;
+		gap: 1rem;
+		padding: 1rem;
+		min-height: 100vh;
+	}
+	
+	h1, #instructions {
+		grid-column: 1 / -1;
+	}
+	
+	#left-container {
+		grid-column: 1;
+		grid-row: 3;
+		position: relative;
+		height: auto;
+		max-height: 70vh;
+		overflow-y: auto;
+	}
+	
+	#right-container {
+		grid-column: 3;
+		grid-row: 3;
+		position: relative;
+		height: auto;
+		max-height: 70vh;
+		overflow-y: auto;
+	}
+	
+	#terrarium {
+		grid-column: 2;
+		grid-row: 3;
+		position: relative;
+		width: 100%;
+		height: 300px;
+		max-width: 350px;
+		justify-self: center;
+		align-self: center;
+	}
+}
+
+/* Mobile layout */
+@media (max-width: 767px) {
+	#page {
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+		gap: 1rem;
+	}
+	
+	.container {
+		position: relative;
+		width: 100%;
+		height: auto;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+		gap: 0.5rem;
+		padding: 1rem;
+	}
+	
+	#terrarium {
+		position: relative;
+		width: 100%;
+		height: 250px;
+		max-width: 300px;
+		margin: 1rem auto;
+		order: 2;
+	}
+	
+	#left-container {
+		order: 1;
+	}
+	
+	#right-container {
+		order: 3;
+	}
+}
+
+/* Plant holder responsive styles */
 .plant-holder {
 	position: relative;
-	height: 13%;
-	left: -10px;
+	aspect-ratio: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	cursor: grab;
 }
 
+.plant-holder:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.plant-holder:active {
+	cursor: grabbing;
+}
+
+/* Desktop plant holder */
+@media (min-width: 1024px) {
+	.plant-holder {
+		height: 13%;
+		min-height: 60px;
+		margin-bottom: 0.5rem;
+	}
+}
+
+/* Tablet plant holder */
+@media (min-width: 768px) and (max-width: 1023px) {
+	.plant-holder {
+		height: 80px;
+		margin-bottom: 0.5rem;
+	}
+}
+
+/* Mobile plant holder */
+@media (max-width: 767px) {
+	.plant-holder {
+		height: 70px;
+		min-height: 60px;
+	}
+}
+
+/* Plant images responsive */
 .plant {
 	position: absolute;
-	max-width: 150%;
-	max-height: 150%;
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+	object-fit: contain;
 	z-index: 2;
+	transition: transform 0.2s ease;
+	cursor: grab;
+	user-select: none;
+	-webkit-user-drag: none;
 }
 
-/*https://codepen.io/Rotarepmi/pen/rjpNZY*/
+.plant:active {
+	cursor: grabbing;
+	transform: scale(1.05);
+}
+
+/* Terrarium jar responsive styles */
+#terrarium {
+	position: relative;
+}
 
 .jar-walls {
 	height: 80%;
@@ -54,8 +238,9 @@ h1 {
 	position: absolute;
 	bottom: 0.5%;
 	left: 20%;
-	opacity: 0.5;
+	opacity: 0.6;
 	z-index: 1;
+	box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .jar-top {
@@ -65,8 +250,9 @@ h1 {
 	position: absolute;
 	bottom: 80.5%;
 	left: 25%;
-	opacity: 0.7;
+	opacity: 0.8;
 	z-index: 1;
+	border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .jar-bottom {
@@ -76,7 +262,7 @@ h1 {
 	position: absolute;
 	bottom: 0%;
 	left: 25%;
-	opacity: 0.7;
+	opacity: 0.8;
 }
 
 .dirt {
@@ -87,26 +273,118 @@ h1 {
 	border-radius: 0 0 1rem 1rem;
 	bottom: 1%;
 	left: 20%;
-	opacity: 0.7;
-	z-index: -1;
+	opacity: 0.8;
+	z-index: 0;
 }
 
 .jar-glossy-long {
 	width: 3%;
 	height: 20%;
 	border-radius: 2rem;
-	background: #ddfbff;
+	background: linear-gradient(45deg, #ddfbff, #ffffff);
 	position: absolute;
 	bottom: 20%;
 	left: 5%;
+	opacity: 0.9;
+	z-index: 2;
 }
 
 .jar-glossy-short {
 	width: 3%;
 	height: 5%;
 	border-radius: 2rem;
-	background: #ddfbff;
+	background: linear-gradient(45deg, #ddfbff, #ffffff);
 	position: absolute;
 	bottom: 45%;
 	left: 5%;
+	opacity: 0.9;
+	z-index: 2;
+}
+
+/* Responsive terrarium scaling */
+@media (max-width: 480px) {
+	#terrarium {
+		height: 200px;
+		max-width: 250px;
+	}
+	
+	.jar-glossy-long,
+	.jar-glossy-short {
+		width: 4%;
+	}
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+	.plant-holder:hover {
+		transform: none;
+		box-shadow: none;
+	}
+	
+	.plant {
+		min-width: 44px;
+		min-height: 44px;
+	}
+	
+	.container {
+		padding: 1.5rem;
+	}
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+	.plant {
+		image-rendering: -webkit-optimize-contrast;
+		image-rendering: crisp-edges;
+	}
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+	* {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+	body {
+		background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+		color: #ecf0f1;
+	}
+	
+	h1, #instructions {
+		color: #ecf0f1;
+	}
+	
+	.container {
+		background-color: rgba(52, 73, 94, 0.9);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	
+	.jar-walls, .jar-top, .jar-bottom {
+		background: #34495e;
+	}
+}
+
+/* Print styles */
+@media print {
+	body {
+		background: white;
+	}
+	
+	.container {
+		position: relative !important;
+		width: 100% !important;
+		height: auto !important;
+		page-break-inside: avoid;
+	}
+	
+	#terrarium {
+		position: relative !important;
+		transform: none !important;
+		page-break-inside: avoid;
+	}
 }
